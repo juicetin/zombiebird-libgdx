@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.juicetin.gameworld.GameRenderer;
 import com.juicetin.gameworld.GameWorld;
+import com.juicetin.zbhelpers.InputHandler;
 
 /**
  * Created by justinting on 8/03/15.
@@ -14,22 +15,21 @@ public class GameScreen implements Screen {
     private GameRenderer renderer;
     
     public GameScreen() {
-        Gdx.app.log("GameScree", "Attached");
-        world = new GameWorld();
+        float screenWidth = Gdx.graphics.getWidth();
+        float screenHeight = Gdx.graphics.getHeight();
+        float gameWidth = 136;
+        float gameHeight = screenHeight / (screenWidth / gameWidth);
+        
+        int midPointY = (int) (gameHeight / 2);
+        
+        world = new GameWorld(midPointY);
         renderer = new GameRenderer(world);
+        
+        Gdx.input.setInputProcessor(new InputHandler(world.getBird()));
     }
 
     @Override
     public void render(float delta) {
-//        //Sets colour to fill screen
-//        Gdx.gl.glClearColor(10 / 255.0f, 15 / 255.0f, 230 / 255.0f, 1f);
-//
-//        //Fills screen with selected colour
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//        
-//        //Convert frame rate to String, print it
-//        Gdx.app.log("GameScreen FPS", (1/delta) + "");
-        
         world.update(delta);
         renderer.render();
     }
