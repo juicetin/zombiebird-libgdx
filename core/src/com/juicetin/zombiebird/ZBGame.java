@@ -28,7 +28,7 @@ package com.juicetin.zombiebird;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.justin.screens.GameScreen;
+import com.juicetin.screens.GameScreen;
 
 public class ZBGame extends Game {
         

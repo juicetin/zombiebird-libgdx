@@ -1,27 +1,37 @@
-package com.justin.screens;
+package com.juicetin.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
+import com.juicetin.gameworld.GameRenderer;
+import com.juicetin.gameworld.GameWorld;
 
 /**
  * Created by justinting on 8/03/15.
  */
 public class GameScreen implements Screen {
+
+    private GameWorld world;
+    private GameRenderer renderer;
+    
     public GameScreen() {
         Gdx.app.log("GameScree", "Attached");
+        world = new GameWorld();
+        renderer = new GameRenderer(world);
     }
 
     @Override
     public void render(float delta) {
-        //Sets colour to fill screen
-        Gdx.gl.glClearColor(10 / 255.0f, 15 / 255.0f, 230 / 255.0f, 1f);
-
-        //Fills screen with selected colour
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//        //Sets colour to fill screen
+//        Gdx.gl.glClearColor(10 / 255.0f, 15 / 255.0f, 230 / 255.0f, 1f);
+//
+//        //Fills screen with selected colour
+//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//        
+//        //Convert frame rate to String, print it
+//        Gdx.app.log("GameScreen FPS", (1/delta) + "");
         
-        //Convert frame rate to String, print it
-        
+        world.update(delta);
+        renderer.render();
     }
 
     @Override
